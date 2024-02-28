@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthexceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -69,6 +70,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -115,11 +117,18 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 
     # Social authentication backends
-    'social_core.backends.google.GoogleOAuth2',  # Add this line for Google OAuth2
+    'social_core.backends.google.GoogleOAuth2',  
+    'social_core.backends.facebook.FacebookOAuth2'
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '128717339917-gutfh3g4lt4b462r7gdv2mevmm7mg54q.apps.googleusercontent.com'
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_FACEBOOK_KEY = "2008194246233986"
+SOCIAL_AUTH_FACEBOOK_SECRET = "fab797cd00f09d95f7970de67d76955d"
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = [
+    'email',
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
