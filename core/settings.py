@@ -35,8 +35,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 ]
+
 
 
 SITE_ID = 1
@@ -53,7 +55,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthexceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -70,7 +71,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
-                'social_django.context_processors.backends',
             ],
         },
     },
@@ -109,6 +109,28 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+SOCIALACCOUNT_PROVIDERS = \
+    {'facebook':
+       {'METHOD': 'oauth2',
+        'SCOPE': ['email','public_profile', 'user_friends'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'FIELDS': [
+            'id',
+            'email',
+            'name',
+            'first_name',
+            'last_name',
+            'verified',
+            'locale',
+            'timezone',
+            'link',
+            'gender',
+            'updated_time'],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'kr_KR',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v2.4'}}
+
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -118,7 +140,6 @@ AUTHENTICATION_BACKENDS = [
 
     # Social authentication backends
     'social_core.backends.google.GoogleOAuth2',  
-    'social_core.backends.facebook.FacebookOAuth2'
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '128717339917-gutfh3g4lt4b462r7gdv2mevmm7mg54q.apps.googleusercontent.com'
@@ -129,6 +150,7 @@ SOCIAL_AUTH_FACEBOOK_SECRET = "fab797cd00f09d95f7970de67d76955d"
 SOCIAL_AUTH_FACEBOOK_SCOPE = [
     'email',
 ]
+LOGIN_REDIRECT_URL = "/" 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
