@@ -8,6 +8,8 @@ urlpatterns = i18n_patterns(
     path('admin/', admin.site.urls),
     path('cart/', include('cart.urls', namespace='cart')),
     path('users/', include('allauth.urls')),
+    path('users/', include('allauth.socialaccount.urls')),  # Include Socialaccount URLs for social authentication
+    path('social/', include('allauth.socialaccount.urls')),
     path('orders/', include('orders.urls', namespace='orders')),
     path('', include('app.urls')),
 )

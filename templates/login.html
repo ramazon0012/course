@@ -24,6 +24,7 @@
               <!-- Avatar group -->
               <ul class="avatar-group mb-2 mb-sm-0">
                 {% for user in users %}
+                {% if user.avatar %}
                 <li class="avatar avatar-sm">
                   <img
                     class="avatar-img rounded-circle"
@@ -31,6 +32,15 @@
                     alt="avatar"
                   />
                 </li>
+                {% else %}
+                <li class="avatar avatar-sm">
+                  <img
+                    class="avatar-img rounded-circle"
+                    src="https://www.imagensempng.com.br/wp-content/uploads/2021/08/Icone-usuario-Png.png"
+                    alt="avatar"
+                  />
+                </li>
+                {% endif %}
                 {% endfor %}
               </ul>
               <!-- Content -->
@@ -128,14 +138,14 @@
 
                 <!-- Social btn -->
                 <div class="col-xxl-6 d-grid">
-                  <a href="#" class="btn bg-google mb-2 mb-xxl-0"
+                  <a href="http://127.0.0.1:8000/uz/users/google/login/?process=login" class="btn bg-google mb-2 mb-xxl-0"
                     ><i class="fab fa-fw fa-google text-white me-2"></i>Login
                     with Google</a
                   >
                 </div>
                 <!-- Social btn -->
                 <div class="col-xxl-6 d-grid">
-                  <a href="#" class="btn bg-facebook mb-0"
+                  <a href="http://127.0.0.1:8000/uz/users/facebook/login/?process=login" class="btn bg-facebook mb-0"
                     ><i class="fab fa-fw fa-facebook-f me-2"></i>Login with
                     Facebook</a
                   >
