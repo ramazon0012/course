@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-27 19:40+0500\n"
+"POT-Creation-Date: 2024-02-29 20:41+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,18 +24,44 @@ msgstr ""
 msgid "Boshqa kurslar"
 msgstr "Другие курсы"
 
-#: .\core\settings.py:112
+#: .\app\views.py:14
+msgid "Featured Courses"
+msgstr "Фыввсыу4к ьллопрпр"
+
+#: .\app\views.py:15
+msgid "Category"
+msgstr "Лфеуещзк"
+
+#: .\app\views.py:16
+msgid "Education, talents, and career opportunities. All in one place."
+msgstr "Фтвоысмб, воатцумтац, фва сфкуку аоытолмтолм. Фст ыр ово фзвлв"
+
+#: .\app\views.py:17
+msgid ""
+"Get inspired and discover something new today. Grow your skill with the most "
+"reliable online courses and certifications in marketing, information "
+"technology, programming, and data science."
+msgstr ""
+"Get inspired and discover something new today. Grow your skill with the most "
+"reliable online courses and certifications in marketing, information "
+"technology, programming, and data science."
+
+#: .\app\views.py:18
+msgid "Find your course"
+msgstr "Рыосвы втсоылв соыыофл"
+
+#: .\app\views.py:19
+msgid "Explore top picks of the week"
+msgstr "Упфроыро ыфол ыос ыо ыоы фнкроф"
+
+#: .\core\settings.py:179
 msgid "Uzbek"
 msgstr ""
 
-#: .\core\settings.py:113
+#: .\core\settings.py:180
 msgid "English"
 msgstr ""
 
-#: .\core\settings.py:114
+#: .\core\settings.py:181
 msgid "Russian"
-msgstr ""
-
-#: .\templates\home.html:561
-msgid "Read more"
 msgstr ""

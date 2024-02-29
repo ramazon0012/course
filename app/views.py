@@ -11,10 +11,26 @@ from django.utils.translation import gettext as _
 
 def home(request):
     text = _("Boshqa kurslar")
+    gap = _("Featured Courses")
+    categorys = _("Category")
+    title = _("Education, talents, and career opportunities. All in one place.")
+    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
+    find = _("Find your course")
+    nimadir = _("Explore top picks of the week")
     parts = Part.objects.all()
     courses = Course.objects.all()
     
-    return render(request, "home.html", {"courses" : courses, "parts" : parts, "text" : text})
+    return render(request, "home.html", {
+        "courses" : courses,
+        "parts" : parts,
+        "text" : text,
+        "gap" : gap,
+        "category" : categorys,
+        "title" : title,
+        "des" : des,
+        "find" : find,
+        "nimadir" : nimadir
+    })
 
 def courses(request):
     courses = Course.objects.all()

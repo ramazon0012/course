@@ -48,7 +48,7 @@
             <i
               class="bi bi-grid-3x3-gap-fill me-1 d-none d-xl-inline-block"
             ></i>
-            <span class="d-none d-xl-inline-block">Category</span>
+            <span class="d-none d-xl-inline-block">{{ category }}</span>
           </a>
 
           <ul
@@ -372,12 +372,10 @@
           </figure>
 
           <h1>
-            Education, talents, and career opportunities. All in one place.
+            {{ title }}
           </h1>
           <p>
-            Get inspired and discover something new today. Grow your skill with
-            the most reliable online courses and certifications in marketing,
-            information technology, programming, and data science.
+            {{ des }}
           </p>
 
           <div class="col-md-8 text-center mx-auto pb-5">
@@ -387,7 +385,7 @@
                   class="form-control border-0 me-1"
                   name="query"
                   type="search"
-                  placeholder="Find your course"
+                  placeholder="{{ find }}"
                 />
                 <button
                   type="submit"
@@ -463,8 +461,8 @@
       {% if courses %}
       <div class="row mb-4">
         <div class="col-lg-8 text-center mx-auto">
-          <h2 class="fs-1 mb-0">Featured Courses</h2>
-          <p class="mb-0">Explore top picks of the week</p>
+          <h2 class="fs-1 mb-0">{{ gap }}</h2>
+          <p class="mb-0">{{ nimadir }}</p>
         </div>
       </div>
       {% endif %}
