@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-29 20:41+0500\n"
+"POT-Creation-Date: 2024-03-02 06:03+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,15 +26,16 @@ msgstr "Другие курсы"
 
 #: .\app\views.py:14
 msgid "Featured Courses"
-msgstr "Фыввсыу4к ьллопрпр"
+msgstr "Рекомендуемые курсы"
 
 #: .\app\views.py:15
 msgid "Category"
-msgstr "Лфеуещзк"
+msgstr "Категория"
 
 #: .\app\views.py:16
 msgid "Education, talents, and career opportunities. All in one place."
-msgstr "Фтвоысмб, воатцумтац, фва сфкуку аоытолмтолм. Фст ыр ово фзвлв"
+msgstr ""
+"Образование, таланты и возможности карьерного роста. Все в одном месте."
 
 #: .\app\views.py:17
 msgid ""
@@ -42,17 +43,61 @@ msgid ""
 "reliable online courses and certifications in marketing, information "
 "technology, programming, and data science."
 msgstr ""
-"Get inspired and discover something new today. Grow your skill with the most "
-"reliable online courses and certifications in marketing, information "
-"technology, programming, and data science."
+"Вдохновитесь и откройте для себя что-то новое уже сегодня. Развивайте свои "
+"навыки с помощью самых надежных онлайн-курсов и сертификаций в области "
+"маркетинга, информационных технологий, программирования и науки о данных."
 
 #: .\app\views.py:18
 msgid "Find your course"
-msgstr "Рыосвы втсоылв соыыофл"
+msgstr "Найдите свой курс"
 
 #: .\app\views.py:19
 msgid "Explore top picks of the week"
-msgstr "Упфроыро ыфол ыос ыо ыоы фнкроф"
+msgstr "Изучите лучшие новости недели"
+
+#: .\app\views.py:20
+msgid "Search"
+msgstr "Поиск"
+
+#: .\app\views.py:21
+msgid "Language"
+msgstr "Язык"
+
+#: .\app\views.py:22
+msgid "Courses"
+msgstr "Курсы"
+
+#: .\app\views.py:23
+msgid "Edit Profile"
+msgstr "Редактировать профиль"
+
+#: .\app\views.py:24
+msgid "Account Settings"
+msgstr "Настройки учетной записи"
+
+#: .\app\views.py:25
+msgid "Help"
+msgstr "Помощь"
+
+#: .\app\views.py:26
+msgid "Sign Out"
+msgstr "Выход"
+
+#: .\app\views.py:27
+msgid "Light"
+msgstr "Свет"
+
+#: .\app\views.py:28
+msgid "Dark"
+msgstr "Темный"
+
+#: .\app\views.py:29
+msgid "Auto"
+msgstr "Авто"
+
+#: .\app\views.py:30
+msgid "View all categories"
+msgstr "Посмотреть все категории"
 
 #: .\core\settings.py:179
 msgid "Uzbek"

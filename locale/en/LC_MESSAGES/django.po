@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-29 20:41+0500\n"
+"POT-Creation-Date: 2024-03-02 06:03+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,6 +51,50 @@ msgstr "Find your course"
 #: .\app\views.py:19
 msgid "Explore top picks of the week"
 msgstr "Explore top picks of the week"
+
+#: .\app\views.py:20
+msgid "Search"
+msgstr "Search"
+
+#: .\app\views.py:21
+msgid "Language"
+msgstr "Language"
+
+#: .\app\views.py:22
+msgid "Courses"
+msgstr "Courses"
+
+#: .\app\views.py:23
+msgid "Edit Profile"
+msgstr "Edit Profile"
+
+#: .\app\views.py:24
+msgid "Account Settings"
+msgstr "Account Settings"
+
+#: .\app\views.py:25
+msgid "Help"
+msgstr "Help"
+
+#: .\app\views.py:26
+msgid "Sign Out"
+msgstr "Sign Out"
+
+#: .\app\views.py:27
+msgid "Light"
+msgstr "Light"
+
+#: .\app\views.py:28
+msgid "Dark"
+msgstr "Dark"
+
+#: .\app\views.py:29
+msgid "Auto"
+msgstr "Auto"
+
+#: .\app\views.py:30
+msgid "View all categories"
+msgstr "View all categories"
 
 #: .\core\settings.py:179
 msgid "Uzbek"

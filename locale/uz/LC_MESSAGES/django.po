@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-29 20:41+0500\n"
+"POT-Creation-Date: 2024-03-02 06:03+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,9 +40,9 @@ msgid ""
 "reliable online courses and certifications in marketing, information "
 "technology, programming, and data science."
 msgstr ""
-"Get inspired and discover something new today. Grow your skill with the most "
-"reliable online courses and certifications in marketing, information "
-"technology, programming, and data science."
+"Bugun ilhom oling va yangi narsalarni kashf eting. O'z mahoratingizni "
+"maksimal darajada oshiringishonchli onlayn kurslar va marketing bo'yicha "
+"sertifikatlar, ma'lumottexnologiya, dasturlash va ma'lumotlar fani."
 
 #: .\app\views.py:18
 msgid "Find your course"
@@ -50,7 +50,51 @@ msgstr "O'z kursingni top"
 
 #: .\app\views.py:19
 msgid "Explore top picks of the week"
-msgstr "Har haftada nimadir bo'ladi"
+msgstr "Har haftada tanlovlar bo'ladi"
+
+#: .\app\views.py:20
+msgid "Search"
+msgstr "Izla"
+
+#: .\app\views.py:21
+msgid "Language"
+msgstr "Til"
+
+#: .\app\views.py:22
+msgid "Courses"
+msgstr "Kurslar"
+
+#: .\app\views.py:23
+msgid "Edit Profile"
+msgstr "Profilni tahrirlash"
+
+#: .\app\views.py:24
+msgid "Account Settings"
+msgstr "Profil sozlamalari"
+
+#: .\app\views.py:25
+msgid "Help"
+msgstr "Yordam"
+
+#: .\app\views.py:26
+msgid "Sign Out"
+msgstr "Chiqish"
+
+#: .\app\views.py:27
+msgid "Light"
+msgstr "Oq"
+
+#: .\app\views.py:28
+msgid "Dark"
+msgstr "Qora"
+
+#: .\app\views.py:29
+msgid "Auto"
+msgstr "Avto"
+
+#: .\app\views.py:30
+msgid "View all categories"
+msgstr "Barcha kategoriyalarni ko'rish"
 
 #: .\core\settings.py:179
 msgid "Uzbek"

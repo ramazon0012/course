@@ -17,6 +17,17 @@ def home(request):
     des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
     find = _("Find your course")
     nimadir = _("Explore top picks of the week")
+    search = _("Search")
+    language = _("Language")
+    corses = _("Courses")
+    edit = _("Edit Profile")
+    set = _("Account Settings")
+    help = _("Help")
+    sign_out = _("Sign Out")
+    light = _("Light")
+    dark = _("Dark")
+    auto = _("Auto")
+    viewa = _("View all categories")
     parts = Part.objects.all()
     courses = Course.objects.all()
     
@@ -29,7 +40,18 @@ def home(request):
         "title" : title,
         "des" : des,
         "find" : find,
-        "nimadir" : nimadir
+        "nimadir" : nimadir,
+        "search" : search,
+        "language" : language,
+        "corses" : corses,
+        "edit" : edit,
+        "set" : set,
+        "help" : help,
+        "sign_out" : sign_out,
+        "light" : light,
+        "dark" : dark,
+        "auto" : auto,
+        "viewa" : viewa
     })
 
 def courses(request):

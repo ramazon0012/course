@@ -63,7 +63,7 @@
               <a
                 class="dropdown-item bg-primary text-primary bg-opacity-10 rounded-2 mb-0"
                 href="parts/"
-                >View all categories</a
+                >{{ viewa }}</a
               >
             </li>
           </ul>
@@ -82,7 +82,7 @@
                   class="form-control pe-5 bg-secondary bg-opacity-10 border-0"
                   type="search"
                   name="quer"
-                  placeholder="Search"
+                  placeholder="{{ search }}"
                   aria-label="Search"
                 />
                 <button
@@ -124,7 +124,7 @@
             aria-expanded="false"
           >
             <i class="fas fa-globe me-2"></i>
-            <span class="d-none d-lg-inline-block">Language</span>
+            <span class="d-none d-lg-inline-block">{{ language }}</span>
           </a>
           <ul
             class="dropdown-menu dropdown-menu-end min-w-auto"
@@ -145,7 +145,7 @@
                   class="fa-fw me-2"
                   src="https://savol-javoblar.darakchi.net/uploads/posts/2023-11/ozbekiston-bayrogi-bolalar-uchun-sher-1.jpg"
                   alt=""
-                />Uzbek</a
+                />O'zbek</a
               >
             </li>
             <li>
@@ -154,7 +154,7 @@
                   class="fa-fw me-2"
                   src="https://ggym.ru/wp-content/uploads/2021/10/flag-russia-XL.jpg"
                   alt=""
-                />Russian</a
+                />Русский</a
               >
             </li>
           </ul>
@@ -221,22 +221,22 @@
           <!-- Links -->
           <li>
             <a class="dropdown-item" href="{% url "updateUser" request.user.pk %}"
-              ><i class="bi bi-person fa-fw me-2"></i>Edit Profile</a
+              ><i class="bi bi-person fa-fw me-2"></i>{{ edit }}</a
             >
           </li>
           <li>
             <a class="dropdown-item" href="#"
-              ><i class="bi bi-gear fa-fw me-2"></i>Account Settings</a
+              ><i class="bi bi-gear fa-fw me-2"></i>{{ set }}</a
             >
           </li>
           <li>
             <a class="dropdown-item" href="#"
-              ><i class="bi bi-info-circle fa-fw me-2"></i>Help</a
+              ><i class="bi bi-info-circle fa-fw me-2"></i>{{ help }}</a
             >
           </li>
           <li>
             <a class="dropdown-item bg-danger-soft-hover" href="logout/"
-              ><i class="bi bi-power fa-fw me-2"></i>Sign Out</a
+              ><i class="bi bi-power fa-fw me-2"></i>{{ sign_out }}</a
             >
           </li>
           <li><hr class="dropdown-divider" /></li>
@@ -263,7 +263,7 @@
                   />
                   <use href="#"></use>
                 </svg>
-                Light
+                {{ light }}
               </button>
               <button
                 type="button"
@@ -286,7 +286,7 @@
                   />
                   <use href="#"></use>
                 </svg>
-                Dark
+                {{ dark }}
               </button>
               <button
                 type="button"
@@ -306,7 +306,7 @@
                   />
                   <use href="#"></use>
                 </svg>
-                Auto
+                {{ auto }}
               </button>
             </div>
           </li>
@@ -446,7 +446,7 @@
                 <h5 class="mb-0">
                   <a href="{{ part.get_absolute_url }}" class="stretched-link">{{part.name}}</a>
                 </h5>
-                <span>{{part.get_course_count}} Courses</span>
+                <span>{{part.get_course_count}} {{ corses }}</span>
               </div>
             </div>
           </div>
