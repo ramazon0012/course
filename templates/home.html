@@ -6,15 +6,15 @@
   <nav class="navbar navbar-expand-xl">
     <div class="container">
       <!-- Logo START -->
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="/">
         <img
           class="light-mode-item navbar-brand-item"
-          src="assets/images/logo.svg"
+          src="https://eduport.webestica.com/assets/images/logo.svg"
           alt="logo"
         />
         <img
           class="dark-mode-item navbar-brand-item"
-          src="assets/images/logo-light.svg"
+          src="https://eduport.webestica.com/assets/images/logo-light.svg"
           alt="logo"
         />
       </a>
@@ -44,10 +44,13 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <i class="bi bi-grid-3x3-gap-fill me-3 fs-5 me-xl-1 d-xl-none"></i>
+            {% comment %} <i class="bi bi-grid-3x3-gap-fill me-3 fs-5 me-xl-1 d-xl-none"></i>
             <i
               class="bi bi-grid-3x3-gap-fill me-1 d-none d-xl-inline-block"
-            ></i>
+            ></i> {% endcomment %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-grid-3x3-gap-fill me-1 d-none d-xl-inline-block" viewBox="0 0 16 16">
+              <path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>
+            </svg>
             <span class="d-none d-xl-inline-block">{{ category }}</span>
           </a>
 

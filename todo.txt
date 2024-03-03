@@ -8,5 +8,3 @@
 8. Edit/create course
 9. Course status
 10. Search with filter
-http://127.0.0.1:8000/uz/users/google/login/?process=login
-http://127.0.0.1:8000/uz/users/facebook/login/?process=login
