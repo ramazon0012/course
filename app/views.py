@@ -74,6 +74,7 @@ def detail(request, pk):
     lectures = Lecture.objects.filter(course=course)
     videos = Video.objects.filter(course=course)
     lecture_count = lectures.count()
+    parts = Part.objects.all()
     tags = Tags.objects.filter(course=course)
     comments = course.comment_set.all()
 
@@ -117,6 +118,25 @@ def detail(request, pk):
                 new_comment = Comment(body=body, user=request.user, course=course, parent=parent)
                 new_comment.save()
 
+    text = _("Boshqa kurslar")
+    gap = _("Featured Courses")
+    categorys = _("Category")
+    title = _("Education, talents, and career opportunities. All in one place.")
+    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
+    find = _("Find your course")
+    nimadir = _("Explore top picks of the week")
+    search = _("Search")
+    language = _("Language")
+    corses = _("Courses")
+    edit = _("Edit Profile")
+    set = _("Account Settings")
+    help = _("Help")
+    sign_out = _("Sign Out")
+    light = _("Light")
+    dark = _("Dark")
+    auto = _("Auto")
+    viewa = _("View all categories")
+    
     return render(request, "detail.html", {
         "course": course, 
         "reviews": reviews, 
@@ -129,6 +149,25 @@ def detail(request, pk):
         'tags' : tags,
         'rating_form': rating_form,
         'comments' : comments,
+        "parts" : parts,
+        "text" : text,
+        "gap" : gap,
+        "category" : categorys,
+        "title" : title,
+        "des" : des,
+        "find" : find,
+        "nimadir" : nimadir,
+        "search" : search,
+        "language" : language,
+        "corses" : corses,
+        "edit" : edit,
+        "set" : set,
+        "help" : help,
+        "sign_out" : sign_out,
+        "light" : light,
+        "dark" : dark,
+        "auto" : auto,
+        "viewa" : viewa
         }
     )
 
