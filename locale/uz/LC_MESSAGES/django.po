@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-02 06:03+0500\n"
+"POT-Creation-Date: 2024-03-05 16:22+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: .\app\views.py:13
+#: .\app\views.py:13 .\app\views.py:61 .\app\views.py:74 .\app\views.py:150
+#: .\app\views.py:208 .\app\views.py:283 .\app\views.py:412 .\app\views.py:462
+#: .\app\views.py:529
 msgid "Boshqa kurslar"
-msgstr "Boshqa kurslar"
+msgstr "Barcha kurslar"
 
-#: .\app\views.py:14
+#: .\app\views.py:14 .\app\views.py:151 .\app\views.py:209 .\app\views.py:284
+#: .\app\views.py:413 .\app\views.py:463 .\app\views.py:530
 msgid "Featured Courses"
 msgstr "Zamonaviy kurslar"
 
-#: .\app\views.py:15
+#: .\app\views.py:15 .\app\views.py:62 .\app\views.py:152 .\app\views.py:210
+#: .\app\views.py:285 .\app\views.py:414 .\app\views.py:464 .\app\views.py:531
 msgid "Category"
 msgstr "Kategoriya"
 
-#: .\app\views.py:16
+#: .\app\views.py:16 .\app\views.py:153 .\app\views.py:211 .\app\views.py:286
+#: .\app\views.py:415 .\app\views.py:465 .\app\views.py:532
 msgid "Education, talents, and career opportunities. All in one place."
 msgstr "Ta'lim, talantlar va karyera jamoasi. Bari bir joyda"
 
-#: .\app\views.py:17
+#: .\app\views.py:17 .\app\views.py:154 .\app\views.py:212 .\app\views.py:287
+#: .\app\views.py:416 .\app\views.py:466 .\app\views.py:533
 msgid ""
 "Get inspired and discover something new today. Grow your skill with the most "
 "reliable online courses and certifications in marketing, information "
@@ -44,55 +50,68 @@ msgstr ""
 "maksimal darajada oshiringishonchli onlayn kurslar va marketing bo'yicha "
 "sertifikatlar, ma'lumottexnologiya, dasturlash va ma'lumotlar fani."
 
-#: .\app\views.py:18
+#: .\app\views.py:18 .\app\views.py:63 .\app\views.py:155 .\app\views.py:213
+#: .\app\views.py:288 .\app\views.py:417 .\app\views.py:467 .\app\views.py:534
 msgid "Find your course"
 msgstr "O'z kursingni top"
 
-#: .\app\views.py:19
+#: .\app\views.py:19 .\app\views.py:156 .\app\views.py:214 .\app\views.py:289
+#: .\app\views.py:418 .\app\views.py:468 .\app\views.py:535
 msgid "Explore top picks of the week"
 msgstr "Har haftada tanlovlar bo'ladi"
 
-#: .\app\views.py:20
+#: .\app\views.py:20 .\app\views.py:64 .\app\views.py:157 .\app\views.py:215
+#: .\app\views.py:290 .\app\views.py:419 .\app\views.py:469 .\app\views.py:536
 msgid "Search"
 msgstr "Izla"
 
-#: .\app\views.py:21
+#: .\app\views.py:21 .\app\views.py:65 .\app\views.py:158 .\app\views.py:216
+#: .\app\views.py:291 .\app\views.py:420 .\app\views.py:470 .\app\views.py:537
 msgid "Language"
 msgstr "Til"
 
-#: .\app\views.py:22
+#: .\app\views.py:22 .\app\views.py:159 .\app\views.py:217 .\app\views.py:292
+#: .\app\views.py:421 .\app\views.py:471 .\app\views.py:538
 msgid "Courses"
 msgstr "Kurslar"
 
-#: .\app\views.py:23
+#: .\app\views.py:23 .\app\views.py:66 .\app\views.py:160 .\app\views.py:218
+#: .\app\views.py:293 .\app\views.py:422 .\app\views.py:472 .\app\views.py:539
 msgid "Edit Profile"
 msgstr "Profilni tahrirlash"
 
-#: .\app\views.py:24
+#: .\app\views.py:24 .\app\views.py:67 .\app\views.py:161 .\app\views.py:219
+#: .\app\views.py:294 .\app\views.py:423 .\app\views.py:473 .\app\views.py:540
 msgid "Account Settings"
 msgstr "Profil sozlamalari"
 
-#: .\app\views.py:25
+#: .\app\views.py:25 .\app\views.py:68 .\app\views.py:162 .\app\views.py:220
+#: .\app\views.py:295 .\app\views.py:424 .\app\views.py:474 .\app\views.py:541
 msgid "Help"
 msgstr "Yordam"
 
-#: .\app\views.py:26
+#: .\app\views.py:26 .\app\views.py:69 .\app\views.py:163 .\app\views.py:221
+#: .\app\views.py:296 .\app\views.py:425 .\app\views.py:475 .\app\views.py:542
 msgid "Sign Out"
 msgstr "Chiqish"
 
-#: .\app\views.py:27
+#: .\app\views.py:27 .\app\views.py:70 .\app\views.py:164 .\app\views.py:222
+#: .\app\views.py:297 .\app\views.py:426 .\app\views.py:476 .\app\views.py:543
 msgid "Light"
 msgstr "Oq"
 
-#: .\app\views.py:28
+#: .\app\views.py:28 .\app\views.py:71 .\app\views.py:165 .\app\views.py:223
+#: .\app\views.py:298 .\app\views.py:427 .\app\views.py:477 .\app\views.py:544
 msgid "Dark"
 msgstr "Qora"
 
-#: .\app\views.py:29
+#: .\app\views.py:29 .\app\views.py:72 .\app\views.py:166 .\app\views.py:224
+#: .\app\views.py:299 .\app\views.py:428 .\app\views.py:478 .\app\views.py:545
 msgid "Auto"
 msgstr "Avto"
 
-#: .\app\views.py:30
+#: .\app\views.py:30 .\app\views.py:73 .\app\views.py:167 .\app\views.py:225
+#: .\app\views.py:300 .\app\views.py:429 .\app\views.py:479 .\app\views.py:546
 msgid "View all categories"
 msgstr "Barcha kategoriyalarni ko'rish"
 
@@ -107,3 +126,8 @@ msgstr ""
 #: .\core\settings.py:181
 msgid "Russian"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Barcha kurslar"
+#~ msgid "Barcha kurslar"
+#~ msgstr "Barcha kurslar"

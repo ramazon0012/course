@@ -58,7 +58,21 @@ def courses(request):
     courses = Course.objects.all()
     page = request.GET.get('page', 1)
     paginator = Paginator(courses, 4)
-
+    text = _("Boshqa kurslar")
+    categorys = _("Category")
+    find = _("Find your course")
+    search = _("Search")
+    language = _("Language")
+    edit = _("Edit Profile")
+    set = _("Account Settings")
+    help = _("Help")
+    sign_out = _("Sign Out")
+    light = _("Light")
+    dark = _("Dark")
+    auto = _("Auto")
+    viewa = _("View all categories")
+    title = _("Boshqa kurslar")
+    parts = Part.objects.all()
     try:
         courses = paginator.page(page)
     except PageNotAnInteger:
@@ -66,7 +80,24 @@ def courses(request):
     except EmptyPage:
         courses = paginator.page(paginator.num_pages)
     
-    return render(request, "courses.html", {"courses" : courses})
+    return render(request, "courses.html", {
+        "courses" : courses,
+        "text" : text,
+        "category" : categorys,
+        "find" : find,
+        "search" : search,
+        "language" : language,
+        "edit" : edit,
+        "set" : set,
+        "help" : help,
+        "sign_out" : sign_out,
+        "light" : light,
+        "dark" : dark,
+        "auto" : auto,
+        "viewa" : viewa,
+        "title" : title,
+        "parts" : parts
+    })
 
 def detail(request, pk):
     course = get_object_or_404(Course, id=pk)
@@ -176,6 +207,24 @@ def search(request):
     form = CourseSearchForm(request.GET)
 
     courses = Course.objects.all()
+    text = _("Boshqa kurslar")
+    gap = _("Featured Courses")
+    categorys = _("Category")
+    title = _("Education, talents, and career opportunities. All in one place.")
+    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
+    find = _("Find your course")
+    nimadir = _("Explore top picks of the week")
+    search = _("Search")
+    language = _("Language")
+    corses = _("Courses")
+    edit = _("Edit Profile")
+    set = _("Account Settings")
+    help = _("Help")
+    sign_out = _("Sign Out")
+    light = _("Light")
+    dark = _("Dark")
+    auto = _("Auto")
+    viewa = _("View all categories")
 
     # Form-based filtering
     if form.is_valid():
@@ -233,7 +282,24 @@ def full_search(request):
     quer = request.GET.get('quer', '')
     parts  = Part.objects.filter(Q(name__icontains=quer))
     courses  = Course.objects.filter(Q(name__icontains=quer) | Q(level__icontains=quer) | Q(price__icontains=quer))
-    
+    text = _("Boshqa kurslar")
+    gap = _("Featured Courses")
+    categorys = _("Category")
+    title = _("Education, talents, and career opportunities. All in one place.")
+    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
+    find = _("Find your course")
+    nimadir = _("Explore top picks of the week")
+    search = _("Search")
+    language = _("Language")
+    corses = _("Courses")
+    edit = _("Edit Profile")
+    set = _("Account Settings")
+    help = _("Help")
+    sign_out = _("Sign Out")
+    light = _("Light")
+    dark = _("Dark")
+    auto = _("Auto")
+    viewa = _("View all categories")
     context = {
         'quer': quer,
         'courses': courses,
@@ -345,6 +411,24 @@ def registerPage(request):
 def coursesview(request, part_slug=None):
     part = None
     parts = Part.objects.all()
+    text = _("Boshqa kurslar")
+    gap = _("Featured Courses")
+    categorys = _("Category")
+    title = _("Education, talents, and career opportunities. All in one place.")
+    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
+    find = _("Find your course")
+    nimadir = _("Explore top picks of the week")
+    search = _("Search")
+    language = _("Language")
+    corses = _("Courses")
+    edit = _("Edit Profile")
+    set = _("Account Settings")
+    help = _("Help")
+    sign_out = _("Sign Out")
+    light = _("Light")
+    dark = _("Dark")
+    auto = _("Auto")
+    viewa = _("View all categories")
     courses = Course.objects.all()
     if part_slug:
         part = get_object_or_404(Part, 
@@ -377,7 +461,24 @@ def detail_video(request, pk, id):
     review_form = ReviewForm()
     rating_form = RatingForm()
     comment_form = CommentForm()
-
+    text = _("Boshqa kurslar")
+    gap = _("Featured Courses")
+    categorys = _("Category")
+    title = _("Education, talents, and career opportunities. All in one place.")
+    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
+    find = _("Find your course")
+    nimadir = _("Explore top picks of the week")
+    search = _("Search")
+    language = _("Language")
+    corses = _("Courses")
+    edit = _("Edit Profile")
+    set = _("Account Settings")
+    help = _("Help")
+    sign_out = _("Sign Out")
+    light = _("Light")
+    dark = _("Dark")
+    auto = _("Auto")
+    viewa = _("View all categories")
     if request.method == 'POST':
         if review_form.is_valid():
             review_form = ReviewForm(request.POST)
@@ -395,7 +496,7 @@ def detail_video(request, pk, id):
                 rating.course = course
                 rating.user = request.user
                 rating.save()
-
+    
         elif 'comment_submit' in request.POST:
             comment_form = CommentForm(request.POST)
             if comment_form.is_valid():
@@ -427,7 +528,24 @@ def courses_tag(request, name):
     courses = Tags.objects.filter(name=name)
     page = request.GET.get('page', 1)
     paginator = Paginator(courses, 4)
-
+    text = _("Boshqa kurslar")
+    gap = _("Featured Courses")
+    categorys = _("Category")
+    title = _("Education, talents, and career opportunities. All in one place.")
+    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
+    find = _("Find your course")
+    nimadir = _("Explore top picks of the week")
+    search = _("Search")
+    language = _("Language")
+    corses = _("Courses")
+    edit = _("Edit Profile")
+    set = _("Account Settings")
+    help = _("Help")
+    sign_out = _("Sign Out")
+    light = _("Light")
+    dark = _("Dark")
+    auto = _("Auto")
+    viewa = _("View all categories")
     try:
         courses = paginator.page(page)
     except PageNotAnInteger:
