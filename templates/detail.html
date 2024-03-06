@@ -839,11 +839,19 @@ Page content START -->
                     <div class="d-md-flex my-4">
                       <!-- Avatar -->
                       <div class="avatar avatar-xl me-4 flex-shrink-0">
+                        {% if request.user.avatar %}
                         <img
                           class="avatar-img rounded-circle"
                           src="{{review.user.avatar.url}}"
                           alt="avatar"
                         />
+                        {% else %}
+                        <img
+                          class="avatar-img rounded-circle"
+                          src="https://www.imagensempng.com.br/wp-content/uploads/2021/08/Icone-usuario-Png.png"
+                          alt="avatar"
+                        />
+                        {% endif %}
                       </div>
                       <!-- Text -->
                       <div>

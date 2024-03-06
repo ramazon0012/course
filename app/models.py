@@ -56,6 +56,7 @@ class Course(models.Model):
         (5, '5'),
     )
     name = models.CharField(max_length=50)
+    students = models.ManyToManyField(User, related_name="student")
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, related_name="teacher")
     video = models.FileField(upload_to="courses/")
     like = models.ManyToManyField(User, related_name = 'like', blank=True)
@@ -183,6 +184,8 @@ class Video(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     course = models.ForeignKey(Course, related_name='courses', on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.name
 class Tags(models.Model):
     name = models.CharField(max_length=25)
     course = models.ForeignKey(Course, related_name='courslar', on_delete=models.CASCADE)

@@ -503,7 +503,10 @@
                     >
                       <i class="fas fa-user-graduate"></i>
                     </div>
-                    <span class="h6 fw-light mb-0 ms-2">9.1k</span>
+                    {% comment %} <span class="h6 fw-light mb-0 ms-2">fdsf</span> {% endcomment %}
+                    {% for student in course.student %}
+                      <span class="h6 fw-light mb-0 ms-2">{{ student.email }}</span>
+                    {% endfor %}
                   </li>
                   <li
                     class="list-inline-item d-flex justify-content-center align-items-center"

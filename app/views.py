@@ -448,9 +448,7 @@ def detail_video(request, pk, id):
     lecture = get_object_or_404(lectures, id=pk)
     videos_queryset = lecture.videos.all()
 
-    # Check if there are any videos associated with the lecture
     if videos_queryset.exists():
-        # Get a list of video IDs associated with the lecture
         video_ids = videos_queryset.get(id=id)
         print(video_ids)
     else:
