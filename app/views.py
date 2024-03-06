@@ -208,15 +208,10 @@ def search(request):
 
     courses = Course.objects.all()
     text = _("Boshqa kurslar")
-    gap = _("Featured Courses")
     categorys = _("Category")
-    title = _("Education, talents, and career opportunities. All in one place.")
-    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
     find = _("Find your course")
-    nimadir = _("Explore top picks of the week")
     search = _("Search")
     language = _("Language")
-    corses = _("Courses")
     edit = _("Edit Profile")
     set = _("Account Settings")
     help = _("Help")
@@ -225,6 +220,7 @@ def search(request):
     dark = _("Dark")
     auto = _("Auto")
     viewa = _("View all categories")
+    title = _("Boshqa kurslar")
 
     # Form-based filtering
     if form.is_valid():
@@ -254,6 +250,20 @@ def search(request):
         'form': form,
         'query': query,
         'courses': courses,
+        "text" : text,
+        "category" : categorys,
+        "find" : find,
+        "search" : search,
+        "language" : language,
+        "edit" : edit,
+        "set" : set,
+        "help" : help,
+        "sign_out" : sign_out,
+        "light" : light,
+        "dark" : dark,
+        "auto" : auto,
+        "viewa" : viewa,
+        "title" : title,
     }
 
     return render(request, 'courses.html', context)
@@ -283,15 +293,11 @@ def full_search(request):
     parts  = Part.objects.filter(Q(name__icontains=quer))
     courses  = Course.objects.filter(Q(name__icontains=quer) | Q(level__icontains=quer) | Q(price__icontains=quer))
     text = _("Boshqa kurslar")
-    gap = _("Featured Courses")
     categorys = _("Category")
     title = _("Education, talents, and career opportunities. All in one place.")
-    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
     find = _("Find your course")
-    nimadir = _("Explore top picks of the week")
     search = _("Search")
     language = _("Language")
-    corses = _("Courses")
     edit = _("Edit Profile")
     set = _("Account Settings")
     help = _("Help")
@@ -304,6 +310,20 @@ def full_search(request):
         'quer': quer,
         'courses': courses,
         'parts': parts,
+        "text" : text,
+        "category" : categorys,
+        "find" : find,
+        "search" : search,
+        "language" : language,
+        "edit" : edit,
+        "set" : set,
+        "help" : help,
+        "sign_out" : sign_out,
+        "light" : light,
+        "dark" : dark,
+        "auto" : auto,
+        "viewa" : viewa,
+        "title" : title
     }
 
     return render(request, 'all.html', context)
@@ -412,15 +432,11 @@ def coursesview(request, part_slug=None):
     part = None
     parts = Part.objects.all()
     text = _("Boshqa kurslar")
-    gap = _("Featured Courses")
     categorys = _("Category")
     title = _("Education, talents, and career opportunities. All in one place.")
-    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
     find = _("Find your course")
-    nimadir = _("Explore top picks of the week")
     search = _("Search")
     language = _("Language")
-    corses = _("Courses")
     edit = _("Edit Profile")
     set = _("Account Settings")
     help = _("Help")
@@ -438,7 +454,22 @@ def coursesview(request, part_slug=None):
         'courses.html',
         {'part': part,
         'parts': parts,
-        'courses': courses})
+        'courses': courses,
+        "text" : text,
+        "category" : categorys,
+        "find" : find,
+        "search" : search,
+        "language" : language,
+        "edit" : edit,
+        "set" : set,
+        "help" : help,
+        "sign_out" : sign_out,
+        "light" : light,
+        "dark" : dark,
+        "auto" : auto,
+        "viewa" : viewa,
+        "title" : title,
+        })
 
 def detail_video(request, pk, id):
     course = get_object_or_404(Course, id=pk)
@@ -460,15 +491,11 @@ def detail_video(request, pk, id):
     rating_form = RatingForm()
     comment_form = CommentForm()
     text = _("Boshqa kurslar")
-    gap = _("Featured Courses")
     categorys = _("Category")
     title = _("Education, talents, and career opportunities. All in one place.")
-    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
     find = _("Find your course")
-    nimadir = _("Explore top picks of the week")
     search = _("Search")
     language = _("Language")
-    corses = _("Courses")
     edit = _("Edit Profile")
     set = _("Account Settings")
     help = _("Help")
@@ -519,6 +546,20 @@ def detail_video(request, pk, id):
         'rating_form': rating_form,
         'comments' : comments,
         'video_ids' : video_ids,
+        "text" : text,
+        "category" : categorys,
+        "find" : find,
+        "search" : search,
+        "language" : language,
+        "edit" : edit,
+        "set" : set,
+        "help" : help,
+        "sign_out" : sign_out,
+        "light" : light,
+        "dark" : dark,
+        "auto" : auto,
+        "viewa" : viewa,
+        "title" : title
         }
     )
 
@@ -551,7 +592,23 @@ def courses_tag(request, name):
     except EmptyPage:
         courses = paginator.page(paginator.num_pages)
     
-    return render(request, 'courses_tag.html', {'courses' : courses})
+    return render(request, 'courses_tag.html', {
+        'courses' : courses,
+        "text" : text,
+        "category" : categorys,
+        "find" : find,
+        "search" : search,
+        "language" : language,
+        "edit" : edit,
+        "set" : set,
+        "help" : help,
+        "sign_out" : sign_out,
+        "light" : light,
+        "dark" : dark,
+        "auto" : auto,
+        "viewa" : viewa,
+        "title" : title
+    })
 
 def delete_course(request, pk, id):
     user = get_object_or_404(User, id=id)
