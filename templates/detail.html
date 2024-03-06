@@ -419,7 +419,7 @@ Page content START -->
                   <i class="fas fa-star text-warning me-2"></i>{{ course.calculate_average_rating }}/5.0
                 </li>
                 <li class="list-inline-item h6 me-3 mb-1 mb-sm-0">
-                  <i class="fas fa-user-graduate text-orange me-2"></i>12k
+                  <i class="fas fa-user-graduate text-orange me-2"></i>{{ course.get_number_of_students }}
                   Enrolled
                 </li>
                 <li class="list-inline-item h6 me-3 mb-1 mb-sm-0">
@@ -462,7 +462,7 @@ Page content START -->
 
                 <!-- Button -->
                 <div class="d-flex mt-2 mt-sm-0">
-                  <a class="btn btn-danger-soft btn-sm mb-0" href="#">Follow</a>
+                  <a class="btn btn-danger-soft btn-sm mb-0" href="{% url "follow_user" request.user.id %}">Follow</a>
                   <!-- Share button with dropdown -->
                   <div class="dropdown ms-2">
                     <a

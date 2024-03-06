@@ -328,9 +328,6 @@ def full_search(request):
 
     return render(request, 'all.html', context)
 
-def user_edit(request):
-    return render(request, "edit.html")
-
 @login_required(login_url='login')
 def updateUser(request, pk):
     page = 'User Update'
@@ -362,7 +359,6 @@ def account(request, pk):
     courses = Course.objects.filter(Q(name__icontains=query) | Q(level__icontains=query) | Q(price__icontains=query))
     
     return render(request, "user.html", {'courses': courses, 'courses_c': courses_c})
-
 
 def loginPage(request):
     page = 'Login'
@@ -651,3 +647,23 @@ def add_course(request):
 
 def delete_users(request, pk):
     return render(request, 'delete_user.html')
+
+@login_required(login_url='login')
+def follow_user(request, pk):
+    course = get_object_or_404(User, id=pk)
+    if pk:
+        course.follower.add(request.user)
+
+        return redirect('detail', course.pk)
+
+    return render(request, 'detail.html')
+# ______________________
+@login_required(login_url='login')
+def unfollow_user(request, pk):
+    course = get_object_or_404(User, id=pk)
+    if pk:
+        course.follower.remove(request.user)
+
+        return redirect('detail', course.pk)
+
+    return render(request, 'detail.html')

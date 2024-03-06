@@ -20,6 +20,7 @@ class User(AbstractUser):
     phone = models.CharField(max_length=10)
     address = models.CharField(max_length=50)
     avatar = models.ImageField(null=True, blank=True, upload_to="avatar/")
+    follower = models.ManyToManyField('User', related_name='follow', blank=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
@@ -71,6 +72,12 @@ class Course(models.Model):
     def get_ratings(self):
         return Rating.objects.filter(course=self)
 
+    def get_number_of_students(self):
+        student_count = self.students.count()
+        total_students = student_count 
+
+        return total_students
+    
     def calculate_average_rating(self):
         user_ratings = [int(rating.rating) for rating in self.get_ratings()]
         if user_ratings:
