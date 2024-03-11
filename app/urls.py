@@ -6,6 +6,7 @@ urlpatterns = [
     path('parts/', parts, name="parts"),
     path('account/<str:pk>/', account, name="account"),
     path('account_courses/<str:pk>/', user_courses, name="user_courses"),
+    path('video-duration/', video_duration, name='video_duration'),
     path('add_course/', add_course, name="add_course"),
     path('delete_users/<str:pk>/', delete_users, name='delete_users'),
     path('search/', search, name="search"),

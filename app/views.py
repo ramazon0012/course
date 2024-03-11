@@ -3,7 +3,7 @@ from app.models import Course, Part, Comment, User, Lecture, Video, Tags
 from app.forms import ReviewForm, RatingForm, CommentForm, UserForm, MyUserCreationForm, LoginForm, CourseSearchForm
 from django.db.models import Q
 from django.contrib import messages
-from moviepy.editor import VideoFileClip
+from moviepy.video.io.VideoFileClip import VideoFileClip
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -122,14 +122,6 @@ def detail(request, pk):
         last_viewed_video_instance = Video.objects.filter(user=request.user).latest('created_at')
     except Video.DoesNotExist:
         last_viewed_video_instance = None
-    try:
-        clip = VideoFileClip(course.video.url)
-        duration = clip.duration  
-        clip.close() 
-
-        return HttpResponse(f"Video vaqti: {duration} soniya")
-    except Exception as e:
-        return HttpResponse(f"Hata: {str(e)}")
     
     if request.method == 'POST':
         if review_form.is_valid():
@@ -746,3 +738,16 @@ def parts(request):
         "title" : title,
         "parts" : parts
     })
+
+def video_duration(request):
+    video_path = 'media/courses/1_-_RecyclerView_Custom_Basic_AdapterKotlin.mp4'
+    
+    try:
+        clip = VideoFileClip(video_path)
+        duration_seconds = clip.duration
+        duration_minutes = duration_seconds / 60  # Convert seconds to minutes
+        clip.close()
+
+        return HttpResponse(f"Video vaqti: {duration_minutes:.1f} daqiqa")  # Display duration in minutes with two decimal places
+    except Exception as e:
+        return HttpResponse(f"Hata: {str(e)}")
