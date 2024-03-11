@@ -56,6 +56,9 @@ def home(request):
 
 def courses(request):
     courses = Course.objects.all()
+    for course in courses:
+        lectures = Lecture.objects.filter(course_id=course.id)
+        count = lectures.count()
     page = request.GET.get('page', 1)
     paginator = Paginator(courses, 4)
     text = _("Boshqa kurslar")
@@ -71,7 +74,7 @@ def courses(request):
     dark = _("Dark")
     auto = _("Auto")
     viewa = _("View all categories")
-    title = _("Boshqa kurslar")
+    title = _("Barcha kurslar")
     parts = Part.objects.all()
     try:
         courses = paginator.page(page)
@@ -96,7 +99,8 @@ def courses(request):
         "auto" : auto,
         "viewa" : viewa,
         "title" : title,
-        "parts" : parts
+        "parts" : parts,
+        "count" : count
     })
 
 def detail(request, pk):
@@ -357,8 +361,39 @@ def account(request, pk):
     
     query = request.GET.get('query', '')
     courses = Course.objects.filter(Q(name__icontains=query) | Q(level__icontains=query) | Q(price__icontains=query))
+    text = _("Boshqa kurslar")
+    categorys = _("Category")
+    find = _("Find your course")
+    search = _("Search")
+    language = _("Language")
+    edit = _("Edit Profile")
+    set = _("Account Settings")
+    help = _("Help")
+    sign_out = _("Sign Out")
+    light = _("Light")
+    dark = _("Dark")
+    auto = _("Auto")
+    viewa = _("View all categories")
+    title = _("Boshqa kurslar")
     
-    return render(request, "user.html", {'courses': courses, 'courses_c': courses_c})
+    return render(request, "user.html", {
+        'courses': courses,
+        'courses_c': courses_c,
+        "text" : text,
+        "category" : categorys,
+        "find" : find,
+        "search" : search,
+        "language" : language,
+        "edit" : edit,
+        "set" : set,
+        "help" : help,
+        "sign_out" : sign_out,
+        "light" : light,
+        "dark" : dark,
+        "auto" : auto,
+        "viewa" : viewa,
+        "title" : title,
+    })
 
 def loginPage(request):
     page = 'Login'
@@ -561,18 +596,17 @@ def detail_video(request, pk, id):
 
 def courses_tag(request, name):
     courses = Tags.objects.filter(name=name)
+    for course in courses:
+        lectures = Lecture.objects.filter(course_id=course.id)
+        count = lectures.count()
     page = request.GET.get('page', 1)
     paginator = Paginator(courses, 4)
     text = _("Boshqa kurslar")
-    gap = _("Featured Courses")
     categorys = _("Category")
     title = _("Education, talents, and career opportunities. All in one place.")
-    des = _("Get inspired and discover something new today. Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.")
     find = _("Find your course")
-    nimadir = _("Explore top picks of the week")
     search = _("Search")
     language = _("Language")
-    corses = _("Courses")
     edit = _("Edit Profile")
     set = _("Account Settings")
     help = _("Help")
@@ -603,7 +637,8 @@ def courses_tag(request, name):
         "dark" : dark,
         "auto" : auto,
         "viewa" : viewa,
-        "title" : title
+        "title" : title,
+        "count" : count,
     })
 
 def delete_course(request, pk, id):
