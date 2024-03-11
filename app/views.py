@@ -117,10 +117,8 @@ def detail(request, pk):
     rating_form = RatingForm()
     comment_form = CommentForm()
     try:
-    # Get the most recent video instance for the user
         last_viewed_video_instance = Video.objects.filter(user=request.user).latest('created_at')
     except Video.DoesNotExist:
-        # Handle the case where there are no videos for the user
         last_viewed_video_instance = None
 
     if request.method == 'POST':
