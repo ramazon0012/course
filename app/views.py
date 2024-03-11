@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.translation import gettext as _
 from django.http import HttpResponse
 import logging
+import math
 
 logger = logging.getLogger(__name__)
 
@@ -187,7 +188,8 @@ def detail(request, pk):
         duration_minutes = duration_seconds / 60  # Convert seconds to minutes
         clip.close()
 
-        duration_message = f"{int(duration_minutes)} minutes"
+        rounded_duration_minutes = math.ceil(duration_minutes)
+        duration_message = f"{rounded_duration_minutes} minutes"
         logger.info(duration_message)
     except Exception as e:
         duration_message = None  # Set duration_message to None in case of an error
@@ -557,6 +559,23 @@ def detail_video(request, pk, id):
     dark = _("Dark")
     auto = _("Auto")
     viewa = _("View all categories")
+    for lecture in lectures:
+        for video in lecture.videos.all():
+            video_path = f'media/{video.file.url}'
+
+    try:
+        clip = VideoFileClip(video_path)
+        duration_seconds = clip.duration
+        duration_minutes = duration_seconds / 60  # Convert seconds to minutes
+        clip.close()
+
+        rounded_duration_minutes = math.ceil(duration_minutes)
+        duration_message = f"{rounded_duration_minutes} minutes"
+        logger.info(duration_message)
+    except Exception as e:
+        duration_message = None  # Set duration_message to None in case of an error
+        error_message = f"Hata: {str(e)}"
+        logger.error(error_message)
     if request.method == 'POST':
         if review_form.is_valid():
             review_form = ReviewForm(request.POST)
@@ -597,6 +616,7 @@ def detail_video(request, pk, id):
         'tags' : tags,
         'lecture' : lecture,
         'rating_form': rating_form,
+        "duration_message" : duration_message,
         'comments' : comments,
         'video_ids' : video_ids,
         "text" : text,
