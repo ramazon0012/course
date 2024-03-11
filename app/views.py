@@ -3,11 +3,13 @@ from app.models import Course, Part, Comment, User, Lecture, Video, Tags
 from app.forms import ReviewForm, RatingForm, CommentForm, UserForm, MyUserCreationForm, LoginForm, CourseSearchForm
 from django.db.models import Q
 from django.contrib import messages
+from moviepy.editor import VideoFileClip
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.translation import gettext as _
+from django.http import HttpResponse
 
 def home(request):
     text = _("Boshqa kurslar")
@@ -120,7 +122,15 @@ def detail(request, pk):
         last_viewed_video_instance = Video.objects.filter(user=request.user).latest('created_at')
     except Video.DoesNotExist:
         last_viewed_video_instance = None
+    try:
+        clip = VideoFileClip(course.video.url)
+        duration = clip.duration  
+        clip.close() 
 
+        return HttpResponse(f"Video vaqti: {duration} soniya")
+    except Exception as e:
+        return HttpResponse(f"Hata: {str(e)}")
+    
     if request.method == 'POST':
         if review_form.is_valid():
             review_form = ReviewForm(request.POST)
@@ -700,3 +710,39 @@ def unfollow_user(request, pk):
         return redirect('detail', course.pk)
 
     return render(request, 'detail.html')
+
+def parts(request):
+    parts = Part.objects.all()
+    text = _("Boshqa kurslar")
+    categorys = _("Category")
+    find = _("Find your course")
+    search = _("Search")
+    language = _("Language")
+    edit = _("Edit Profile")
+    set = _("Account Settings")
+    help = _("Help")
+    sign_out = _("Sign Out")
+    light = _("Light")
+    dark = _("Dark")
+    auto = _("Auto")
+    viewa = _("View all categories")
+    title = _("Barcha kurslar")
+    
+    return render(request, "parts.html", {
+        "parts" : parts,
+        "text" : text,
+        "category" : categorys,
+        "find" : find,
+        "search" : search,
+        "language" : language,
+        "edit" : edit,
+        "set" : set,
+        "help" : help,
+        "sign_out" : sign_out,
+        "light" : light,
+        "dark" : dark,
+        "auto" : auto,
+        "viewa" : viewa,
+        "title" : title,
+        "parts" : parts
+    })
