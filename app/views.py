@@ -175,26 +175,29 @@ def detail(request, pk):
     dark = _("Dark")
     auto = _("Auto")
     viewa = _("View all categories")
-    video_path = None  # Initialize video_path
-    duration_message = None  # Initialize duration_message
-
+    video_paths = []  
     for lecture in lectures:
         for video in lecture.videos.all():
-            video_path = f'media/{video.file.url}'
+            video_paths.append(f'media/{video.file.url}')
 
-    try:
-        clip = VideoFileClip(video_path)
-        duration_seconds = clip.duration
-        duration_minutes = duration_seconds / 60  # Convert seconds to minutes
-        clip.close()
+    if video_paths:
+        try:
+            # Use the first video path for now, you can modify as needed
+            clip = VideoFileClip(video_paths[0])
+            duration_seconds = clip.duration
+            duration_minutes = duration_seconds / 60  # Convert seconds to minutes
+            clip.close()
 
-        rounded_duration_minutes = math.ceil(duration_minutes)
-        duration_message = f"{rounded_duration_minutes} minutes"
-        logger.info(duration_message)
-    except Exception as e:
-        duration_message = None  # Set duration_message to None in case of an error
-        error_message = f"Hata: {str(e)}"
-        logger.error(error_message)
+            rounded_duration_minutes = math.ceil(duration_minutes)
+            duration_message = f"{rounded_duration_minutes} minutes"
+            logger.info(duration_message)
+        except Exception as e:
+            duration_message = None  # Set duration_message to None in case of an error
+            error_message = f"Hata: {str(e)}"
+            logger.error(error_message)
+    else:
+        duration_message = None
+
     return render(request, "detail.html", {
         "course": course, 
         "reviews": reviews, 

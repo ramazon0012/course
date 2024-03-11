@@ -182,6 +182,16 @@ class Lecture(models.Model):
     
     def __str__(self):
         return self.name
+    def completion_percentage(self):
+        total_videos = self.videos.count()
+        watched_videos = self.user.video_set.filter(id__in=self.videos.values_list('id', flat=True)).count()
+
+        if total_videos > 0:
+            percentage = (watched_videos / total_videos) * 100
+        else:
+            percentage = 0
+
+        return round(percentage, 2)
     
 class Video(models.Model):
     file = models.FileField(upload_to="videos/")
@@ -193,6 +203,7 @@ class Video(models.Model):
     
     def __str__(self):
         return self.name
+
 class Tags(models.Model):
     name = models.CharField(max_length=25)
     course = models.ForeignKey(Course, related_name='courslar', on_delete=models.CASCADE)
