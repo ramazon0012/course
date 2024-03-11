@@ -10,6 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.translation import gettext as _
 from django.http import HttpResponse
+import logging
+
+logger = logging.getLogger(__name__)
 
 def home(request):
     text = _("Boshqa kurslar")
@@ -171,10 +174,29 @@ def detail(request, pk):
     dark = _("Dark")
     auto = _("Auto")
     viewa = _("View all categories")
-    
+    video_path = None  # Initialize video_path
+    duration_message = None  # Initialize duration_message
+
+    for lecture in lectures:
+        for video in lecture.videos.all():
+            video_path = f'media/{video.file.url}'
+
+    try:
+        clip = VideoFileClip(video_path)
+        duration_seconds = clip.duration
+        duration_minutes = duration_seconds / 60  # Convert seconds to minutes
+        clip.close()
+
+        duration_message = f"{int(duration_minutes)} minutes"
+        logger.info(duration_message)
+    except Exception as e:
+        duration_message = None  # Set duration_message to None in case of an error
+        error_message = f"Hata: {str(e)}"
+        logger.error(error_message)
     return render(request, "detail.html", {
         "course": course, 
         "reviews": reviews, 
+        "duration_message" : duration_message,
         'review_form': review_form, 
         'comment_form': comment_form,
         'lecture_count' : lecture_count,
