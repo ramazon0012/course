@@ -11,6 +11,8 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.translation import gettext as _
 import logging
 import math
+from django.utils import timezone
+from django.http import HttpResponse
 
 logger = logging.getLogger(__name__)
 
@@ -121,7 +123,7 @@ def detail(request, pk):
     rating_form = RatingForm()
     comment_form = CommentForm()
     try:
-        last_viewed_video_instance = Video.objects.filter(user=request.user).latest('created_at')
+        last_viewed_video_instance = Video.objects.filter(user=request.user, course=course).latest('last_watched')
     except Video.DoesNotExist:
         last_viewed_video_instance = None
     
@@ -532,9 +534,11 @@ def detail_video(request, pk, id):
 
     if videos_queryset.exists():
         video_ids = videos_queryset.get(id=id)
-        print(video_ids)
     else:
         video_ids = None
+    video = get_object_or_404(Video, id=id)
+    video.last_watched = timezone.now()
+    video.save()
     lecture_count = lectures.count()
     comments = course.comment_set.all()
 
@@ -555,23 +559,24 @@ def detail_video(request, pk, id):
     dark = _("Dark")
     auto = _("Auto")
     viewa = _("View all categories")
+    video_durations = []
     for lecture in lectures:
         for video in lecture.videos.all():
             video_path = f'media/{video.file.url}'
+            try:
+                clip = VideoFileClip(video_path)
+                duration_seconds = clip.duration
+                clip.close()
 
-    try:
-        clip = VideoFileClip(video_path)
-        duration_seconds = clip.duration
-        duration_minutes = duration_seconds / 60  # Convert seconds to minutes
-        clip.close()
+                video_durations.append({
+                    'video_name': video.name,
+                    'duration_seconds': duration_seconds,
+                    'duration_minutes': round(duration_seconds / 60)
+                })
 
-        rounded_duration_minutes = math.ceil(duration_minutes)
-        duration_message = f"{rounded_duration_minutes} minutes"
-        logger.info(duration_message)
-    except Exception as e:
-        duration_message = None  # Set duration_message to None in case of an error
-        error_message = f"Hata: {str(e)}"
-        logger.error(error_message)
+            except Exception as e:
+                error_message = f"Error calculating duration for video {video.name}: {str(e)}"
+                logger.error(error_message)
     if request.method == 'POST':
         if review_form.is_valid():
             review_form = ReviewForm(request.POST)
@@ -611,8 +616,8 @@ def detail_video(request, pk, id):
         'lectures' : lectures,
         'tags' : tags,
         'lecture' : lecture,
+        "duration_message" : video_durations,
         'rating_form': rating_form,
-        "duration_message" : duration_message,
         'comments' : comments,
         'video_ids' : video_ids,
         "text" : text,
@@ -776,3 +781,24 @@ def parts(request):
         "title" : title,
         "parts" : parts
     })
+
+def watch_video(request, lecture_id, video_id):
+    lecture = get_object_or_404(Lecture, pk=lecture_id)
+    video = get_object_or_404(Video, pk=video_id)
+
+    # Update the last_watched time for the video for the current user
+    video.last_watched = timezone.now()
+    video.save()
+
+    # You may also want to update the lecture's last_watched time or any other logic
+
+    return HttpResponse("Video watched successfully!")
+
+def last_watched_videos(request, lecture_id):
+    lecture = get_object_or_404(Lecture, pk=lecture_id)
+
+    last_watched_videos = lecture.videos.filter(last_watched__isnull=False).order_by('-last_watched')
+
+    last_watched_video_ids = last_watched_videos.values_list('id', flat=True)
+
+    return HttpResponse(f"Last watched video IDs: {', '.join(map(str, last_watched_video_ids))}")

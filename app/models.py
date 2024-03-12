@@ -200,6 +200,7 @@ class Video(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     course = models.ForeignKey(Course, related_name='courses', on_delete=models.CASCADE)
+    last_watched = models.DateTimeField(null=True, blank=True)
     
     def __str__(self):
         return self.name

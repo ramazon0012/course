@@ -1157,7 +1157,7 @@ Page content START -->
                         <span class="mb-0"
                           >{{ lecture.name }}</span
                         >
-                        <span class="small d-block mt-1">({{ lecture_count }} Lectures)</span>
+                        <span class="small d-block mt-1">({{ lecture.videos.count }} Lectures)</span>
                       </a>
                     </h6>
                     <div
@@ -1211,7 +1211,11 @@ Page content START -->
                                 >{{ video.name }}</span
                               >
                             </div>
-                            <p class="mb-0 text-truncate">{{ duration_message }}</p>
+                            {% for duration_info in duration_message %}
+                                {% if duration_info.video_name == video.name %}
+                                    <p class="mb-0 text-truncate">{{ duration_info.duration_minutes }} minutes</p>
+                                {% endif %}
+                            {% endfor %}
                           </div>
                           {% endfor %}
                         </div>
