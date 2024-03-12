@@ -1,8 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from django.db.models.signals import post_save
-from modeltranslation.translator import TranslationOptions, register
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 # Create your models here
 
@@ -182,16 +181,16 @@ class Lecture(models.Model):
     
     def __str__(self):
         return self.name
-    def completion_percentage(self):
-        total_videos = self.videos.count()
-        watched_videos = self.user.video_set.filter(id__in=self.videos.values_list('id', flat=True)).count()
+
+    def videos_watched_percentage(self):
+        total_videos = self.videos.count()  # Use self.videos instead of self.video_set
+        watched_videos = self.videos.filter(watched=True).count()
 
         if total_videos > 0:
             percentage = (watched_videos / total_videos) * 100
+            return round(percentage, 2)
         else:
-            percentage = 0
-
-        return round(percentage, 2)
+            return 0
     
 class Video(models.Model):
     file = models.FileField(upload_to="videos/")
@@ -201,9 +200,16 @@ class Video(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     course = models.ForeignKey(Course, related_name='courses', on_delete=models.CASCADE)
     last_watched = models.DateTimeField(null=True, blank=True)
-    
+    watched = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if self.last_watched:
+            self.watched = True
+            self.last_watched = timezone.now()
+        super(Video, self).save(*args, **kwargs)
 
 class Tags(models.Model):
     name = models.CharField(max_length=25)
