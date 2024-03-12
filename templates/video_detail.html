@@ -1150,9 +1150,9 @@ Page content START -->
                         class="accordion-button fw-bold rounded collapsed d-block"
                         href="#collapse-1"
                         data-bs-toggle="collapse"
-                        data-bs-target="#collapse-1"
+                        data-bs-target="#collapse-{{ lecture.id }}"
                         aria-expanded="true"
-                        aria-controls="collapse-1"
+                        aria-controls="collapse-{{ lecture.id }}"
                       >
                         <span class="mb-0"
                           >{{ lecture.name }}</span
@@ -1161,9 +1161,9 @@ Page content START -->
                       </a>
                     </h6>
                     <div
-                      id="collapse-1"
+                      id="collapse-{{ lecture.id }}"
                       class="accordion-collapse collapse show"
-                      aria-labelledby="heading-1"
+                      aria-labelledby="heading-{{ lecture.id }}"
                       data-bs-parent="#accordionExample2"
                     >
                       <div class="accordion-body mt-3">
