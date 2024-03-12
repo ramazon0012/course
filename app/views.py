@@ -113,7 +113,6 @@ def detail(request, pk):
     reviews = course.review_set.all()
     lectures = Lecture.objects.filter(course=course)
     videos = Video.objects.filter(course=course)
-    lecture_count = lectures.count()
     parts = Part.objects.all()
     tags = Tags.objects.filter(course=course)
     comments = course.comment_set.all()
@@ -176,16 +175,13 @@ def detail(request, pk):
     viewa = _("View all categories")
     video_durations = [] 
     for lecture in lectures:
-        # Iterate over all videos associated with the current lecture
         for video in lecture.videos.all():
             video_path = f'media/{video.file.url}'
             try:
-                # Get the duration of each video
                 clip = VideoFileClip(video_path)
                 duration_seconds = clip.duration
                 clip.close()
 
-                # Append video information and duration to the list
                 video_durations.append({
                     'video_name': video.name,
                     'duration_seconds': duration_seconds,
@@ -193,7 +189,6 @@ def detail(request, pk):
                 })
 
             except Exception as e:
-                # Handle errors
                 error_message = f"Error calculating duration for video {video.name}: {str(e)}"
                 logger.error(error_message)
 
@@ -203,7 +198,6 @@ def detail(request, pk):
         "duration_message" : video_durations,
         'review_form': review_form, 
         'comment_form': comment_form,
-        'lecture_count' : lecture_count,
         'lectures' : lectures,
         'videos' : videos,
         'last_viewed_video': last_viewed_video_instance,
