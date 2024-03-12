@@ -886,24 +886,26 @@ Page content START -->
                   <!-- Leave Review START -->
                   <div class="mt-2">
                     <h5 class="mb-4">Leave a Review</h5>
-                    <form
-                      method="post"
-                      action="{% url 'detail' course.id %}"
-                      enctype="multipart/form-data"
-                      class="row g-3"
-                    >
-                      <!-- Rating -->
-                      <div class="col-12">{% csrf_token %}{{ rating_form.as_p }}</div>
-                      <!-- Review -->
-                      <div class="col-12">{% csrf_token %}{{ review_form.as_p }}</div>
-                      <!-- Button -->
-                      <div class="col-12">
-                        <button type="submit" class="btn btn-primary mb-0">
-                          Post Review
-                        </button>
-                      </div>
+                    <form method="post" name="review_rating_submit" action="{% url 'detail' course.id %}" enctype="multipart/form-data" class="row g-3">
+                        <!-- Rating -->
+                        <div class="col-12">
+                            {% csrf_token %}
+                            {{ rating_review_form.as_p }}
+                        </div>
+                        <!-- Button -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary mb-0">
+                                Post Review
+                            </button>
+                        </div>
+                        {% if rating_review_form.errors %}
+                            <div class="alert alert-danger">
+                                {{ rating_review_form.errors }}
+                            </div>
+                        {% endif %}
                     </form>
                   </div>
+                
 
                   <!-- Leave Review END -->
                 </div>

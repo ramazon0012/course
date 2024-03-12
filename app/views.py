@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from app.models import Course, Part, Comment, User, Lecture, Video, Tags
-from app.forms import ReviewForm, RatingForm, CommentForm, UserForm, MyUserCreationForm, LoginForm, CourseSearchForm
+from app.models import Course, Part, Comment, User, Lecture, Video, Tags, Review
+from app.forms import RatingReviewForm, CommentForm, UserForm, MyUserCreationForm, LoginForm, CourseSearchForm
 from django.db.models import Q
 from django.contrib import messages
 from moviepy.video.io.VideoFileClip import VideoFileClip
@@ -119,31 +119,28 @@ def detail(request, pk):
     tags = Tags.objects.filter(course=course)
     comments = course.comment_set.all()
 
-    review_form = ReviewForm()
-    rating_form = RatingForm()
     comment_form = CommentForm()
     try:
         last_viewed_video_instance = Video.objects.filter(user=request.user, course=course).latest('last_watched')
     except Video.DoesNotExist:
         last_viewed_video_instance = None
     
-    if request.method == 'POST':
-        if review_form.is_valid():
-            review_form = ReviewForm(request.POST)
-            if review_form.is_valid():
-                review = review_form.save(commit=False)
-                review.course = course
-                review.user = request.user
-                review.save()
-                messages.success(request, 'Review successfully created.')
+    rating_review_form = RatingReviewForm()
 
-        elif rating_form.is_valid():
-            rating_form = RatingForm(request.POST)
-            if rating_form.is_valid():
-                rating = rating_form.save(commit=False)
-                rating.course = course
-                rating.user = request.user
-                rating.save()
+    if request.method == 'POST':
+        rating_review_form = RatingReviewForm(request.POST)
+        if 'review_rating_submit' in request.POST:
+            rating = rating_review_form.cleaned_data['rating']
+            body = rating_review_form.cleaned_data['body']
+
+            review = Review(
+                course=course,
+                user=request.user,
+                rating=rating,
+                body=body,
+            )
+            review.save()
+            messages.success(request, 'Review successfully created.')
 
         elif 'comment_submit' in request.POST:
             comment_form = CommentForm(request.POST)
@@ -152,11 +149,10 @@ def detail(request, pk):
                 try:
                     parent = comment_form.cleaned_data['parent']
                 except:
-                    parent = None  # Set parent to None if it's not provided in the form
+                    parent = None
 
                 new_comment = Comment(body=body, user=request.user, course=course, parent=parent)
                 new_comment.save()
-
     text = _("Boshqa kurslar")
     gap = _("Featured Courses")
     categorys = _("Category")
@@ -198,13 +194,11 @@ def detail(request, pk):
         "course": course, 
         "reviews": reviews, 
         "duration_message" : video_durations,
-        'review_form': review_form, 
         'comment_form': comment_form,
         'lectures' : lectures,
         'videos' : videos,
         'last_viewed_video': last_viewed_video_instance,
         'tags' : tags,
-        'rating_form': rating_form,
         'comments' : comments,
         "parts" : parts,
         "text" : text,
@@ -542,8 +536,6 @@ def detail_video(request, pk, id):
     lecture_count = lectures.count()
     comments = course.comment_set.all()
 
-    review_form = ReviewForm()
-    rating_form = RatingForm()
     comment_form = CommentForm()
     text = _("Boshqa kurslar")
     categorys = _("Category")
@@ -577,24 +569,23 @@ def detail_video(request, pk, id):
             except Exception as e:
                 error_message = f"Error calculating duration for video {video.name}: {str(e)}"
                 logger.error(error_message)
-    if request.method == 'POST':
-        if review_form.is_valid():
-            review_form = ReviewForm(request.POST)
-            if review_form.is_valid():
-                review = review_form.save(commit=False)
-                review.course = course
-                review.user = request.user
-                review.save()
-                messages.success(request, 'Review successfully created.')
+    rating_review_form = RatingReviewForm()
 
-        elif rating_form.is_valid():
-            rating_form = RatingForm(request.POST)
-            if rating_form.is_valid():
-                rating = rating_form.save(commit=False)
-                rating.course = course
-                rating.user = request.user
-                rating.save()
-    
+    if request.method == 'POST':
+        rating_review_form = RatingReviewForm(request.POST)
+        if rating_review_form.is_valid():
+            rating = rating_review_form.cleaned_data['rating']
+            body = rating_review_form.cleaned_data['body']
+
+            review = Review(
+                course=course,
+                user=request.user,
+                rating=rating,
+                body=body,
+            )
+            review.save()
+            messages.success(request, 'Review successfully created.')
+
         elif 'comment_submit' in request.POST:
             comment_form = CommentForm(request.POST)
             if comment_form.is_valid():
@@ -602,7 +593,7 @@ def detail_video(request, pk, id):
                 try:
                     parent = comment_form.cleaned_data['parent']
                 except:
-                    parent = None  # Set parent to None if it's not provided in the form
+                    parent = None
 
                 new_comment = Comment(body=body, user=request.user, course=course, parent=parent)
                 new_comment.save()
@@ -610,14 +601,12 @@ def detail_video(request, pk, id):
     return render(request, "video_detail.html", {
         "course": course, 
         "reviews": reviews, 
-        'review_form': review_form, 
         'comment_form': comment_form,
         'lecture_count' : lecture_count,
         'lectures' : lectures,
         'tags' : tags,
         'lecture' : lecture,
         "duration_message" : video_durations,
-        'rating_form': rating_form,
         'comments' : comments,
         'video_ids' : video_ids,
         "text" : text,

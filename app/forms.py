@@ -2,16 +2,7 @@ from django import forms
 from app.models import Rating, Comment, Review, User, Part, Course
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
-class ReviewForm(forms.ModelForm):
-    class Meta:
-        model = Review  # Replace 'Review' with the actual name of your model
-        fields = ['body']  # Specify the fields you want to include in the form
-
-        widgets = {
-            'body': forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Write your review'}),
-        }
-        
-class RatingForm(forms.ModelForm):
+class RatingReviewForm(forms.ModelForm):
     RATING_CHOICES = [
         ('5', '★★★★★ (5/5)'),
         ('4', '★★★★☆ (4/5)'),
@@ -21,11 +12,11 @@ class RatingForm(forms.ModelForm):
     ]
 
     rating = forms.ChoiceField(choices=RATING_CHOICES, widget=forms.Select(attrs={'class': 'form-select js-choice'}))
-    
-    class Meta:
-        model = Rating
-        fields = ['rating'] 
+    body = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Write your review'}))
 
+    class Meta:
+        model = Review  # Use the Review model, assuming you want to save both review and rating together
+        fields = ['rating', 'body']
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment  # Replace 'Review' with the actual name of your model
