@@ -1219,7 +1219,11 @@ Page content START -->
                                 >{{ video.name }}</span
                               >
                             </div>
-                            <p class="mb-0 text-truncate">{{ duration_message }}</p>
+                            {% for duration_info in duration_message %}
+                                {% if duration_info.video_name == video.name %}
+                                    <p class="mb-0 text-truncate">{{ duration_info.duration_minutes }} minutes</p>
+                                {% endif %}
+                            {% endfor %}
                           </div>
                           {% endfor %}
                         </div>

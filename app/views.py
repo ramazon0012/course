@@ -9,7 +9,6 @@ from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.translation import gettext as _
-from django.http import HttpResponse
 import logging
 import math
 
@@ -175,33 +174,33 @@ def detail(request, pk):
     dark = _("Dark")
     auto = _("Auto")
     viewa = _("View all categories")
-    video_paths = []  
+    video_durations = [] 
     for lecture in lectures:
+        # Iterate over all videos associated with the current lecture
         for video in lecture.videos.all():
-            video_paths.append(f'media/{video.file.url}')
+            video_path = f'media/{video.file.url}'
+            try:
+                # Get the duration of each video
+                clip = VideoFileClip(video_path)
+                duration_seconds = clip.duration
+                clip.close()
 
-    if video_paths:
-        try:
-            # Use the first video path for now, you can modify as needed
-            clip = VideoFileClip(video_paths[0])
-            duration_seconds = clip.duration
-            duration_minutes = duration_seconds / 60  # Convert seconds to minutes
-            clip.close()
+                # Append video information and duration to the list
+                video_durations.append({
+                    'video_name': video.name,
+                    'duration_seconds': duration_seconds,
+                    'duration_minutes': round(duration_seconds / 60)
+                })
 
-            rounded_duration_minutes = math.ceil(duration_minutes)
-            duration_message = f"{rounded_duration_minutes} minutes"
-            logger.info(duration_message)
-        except Exception as e:
-            duration_message = None  # Set duration_message to None in case of an error
-            error_message = f"Hata: {str(e)}"
-            logger.error(error_message)
-    else:
-        duration_message = None
+            except Exception as e:
+                # Handle errors
+                error_message = f"Error calculating duration for video {video.name}: {str(e)}"
+                logger.error(error_message)
 
     return render(request, "detail.html", {
         "course": course, 
         "reviews": reviews, 
-        "duration_message" : duration_message,
+        "duration_message" : video_durations,
         'review_form': review_form, 
         'comment_form': comment_form,
         'lecture_count' : lecture_count,
@@ -783,16 +782,3 @@ def parts(request):
         "title" : title,
         "parts" : parts
     })
-
-def video_duration(request):
-    video_path = 'media/courses/1_-_RecyclerView_Custom_Basic_AdapterKotlin.mp4'
-    
-    try:
-        clip = VideoFileClip(video_path)
-        duration_seconds = clip.duration
-        duration_minutes = duration_seconds / 60  # Convert seconds to minutes
-        clip.close()
-
-        return HttpResponse(f"Video vaqti: {duration_minutes:.1f} daqiqa")  # Display duration in minutes with two decimal places
-    except Exception as e:
-        return HttpResponse(f"Hata: {str(e)}")
