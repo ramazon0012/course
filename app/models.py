@@ -192,6 +192,16 @@ class Lecture(models.Model):
         else:
             return 0
     
+    def video_fraction(self):
+        total_videos = self.videos.count()
+        watched_videos = self.videos.filter(watched=True).count()
+
+        if total_videos > 0:
+            percentage = watched_videos / total_videos
+            return round(percentage, 2)
+        else:
+            return 0
+    
 class Video(models.Model):
     file = models.FileField(upload_to="videos/")
     name = models.CharField(max_length=44)
