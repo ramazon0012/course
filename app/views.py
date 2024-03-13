@@ -721,21 +721,21 @@ def delete_users(request, pk):
 
 @login_required(login_url='login')
 def follow_user(request, pk):
-    course = get_object_or_404(User, id=pk)
+    user = get_object_or_404(User, id=pk)
     if pk:
-        course.follower.add(request.user)
+        user.follower.add(request.user)
 
-        return redirect('detail', course.pk)
+        return redirect('detail', user.pk)
 
     return render(request, 'detail.html')
 # ______________________
 @login_required(login_url='login')
 def unfollow_user(request, pk):
-    course = get_object_or_404(User, id=pk)
+    user = get_object_or_404(User, id=pk)
     if pk:
-        course.follower.remove(request.user)
+        user.follower.remove(request.user)
 
-        return redirect('detail', course.pk)
+        return redirect('detail', user.pk)
 
     return render(request, 'detail.html')
 
