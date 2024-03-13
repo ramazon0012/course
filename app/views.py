@@ -123,7 +123,12 @@ def detail(request, pk):
     try:
         last_viewed_video_instance = Video.objects.filter(user=request.user, course=course).latest('last_watched')
     except Video.DoesNotExist:
-        last_viewed_video_instance = None
+        first_lecture = lectures.first()
+        if first_lecture:
+            first_video = first_lecture.videos.first()
+            last_viewed_video_instance = first_video
+        else:
+            last_viewed_video_instance = None
     
     rating_review_form = RatingReviewForm()
 
@@ -189,7 +194,6 @@ def detail(request, pk):
             except Exception as e:
                 error_message = f"Error calculating duration for video {video.name}: {str(e)}"
                 logger.error(error_message)
-
     return render(request, "detail.html", {
         "course": course, 
         "reviews": reviews, 
