@@ -56,7 +56,7 @@ class Course(models.Model):
         (5, '5'),
     )
     name = models.CharField(max_length=50)
-    students = models.ManyToManyField(User, related_name="student")
+    students = models.ManyToManyField(User, related_name="student", blank=True)
     teacher = models.ForeignKey(User, on_delete=models.CASCADE, related_name="teacher")
     like = models.ManyToManyField(User, related_name = 'like', blank=True)
     image = models.ImageField(upload_to="media/")

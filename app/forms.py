@@ -140,13 +140,11 @@ class CourseSearchForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(CourseSearchForm, self).__init__(*args, **kwargs)
 
-        # Dynamically retrieve parts from the database
         parts = Part.objects.all()
         part_choices = [('', 'All')]
         part_choices.extend([(part.slug, part.name) for part in parts])
-
-        # Update the choices for the 'category' field
-        self.fields['category'] = forms.ChoiceField(choices=part_choices, required=False)
+        attrs = {'class': 'form-select form-select-sm js-choice', 'aria-label': '.form-select-sm example'}
+        self.fields['category'] = forms.ChoiceField(choices=part_choices, required=False, widget=forms.Select(attrs=attrs))
         
 class CourseForm(forms.ModelForm):
     name = forms.CharField(

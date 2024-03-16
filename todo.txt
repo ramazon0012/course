@@ -1,10 +1,8 @@
 1. Cart frontent
 2. Detail 
-3. Checkout frontend
 4. Check responsive
 5. User profile
 6. Translate
-7. Sign in/up with google/email verification
 8. Edit/create course
 9. Course status
 10. Search with filter
