@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from app.models import Course, Part, Comment, User, Lecture, Video, Tags, Review
-from app.forms import RatingReviewForm, CommentForm, UserForm, MyUserCreationForm, LoginForm, CourseSearchForm
+from app.forms import RatingReviewForm, CommentForm, UserForm, MyUserCreationForm, LoginForm, CourseSearchForm, CourseForm
 from django.db.models import Q
 from django.contrib import messages
 from moviepy.video.io.VideoFileClip import VideoFileClip
@@ -714,7 +714,17 @@ def user_courses(request, pk):
     return render(request, "user_courses.html", {'courses': courses, 'user_courses': user_courses})
 
 def add_course(request):
-    return render(request, 'add.html')
+    if request.method == 'POST':
+        form = CourseForm(request.POST, request.FILES)
+        if form.is_valid():
+            course = form.save(commit=False)
+            course.teacher = request.user
+            course.save()
+            form.save_m2m()  # Save many-to-many relationships if any
+            return redirect('course_detail', pk=course.pk)  # Redirect to the detail view of the newly created course
+    else:
+        form = CourseForm()
+    return render(request, 'add.html', {'form': form})
 
 def delete_users(request, pk):
     return render(request, 'delete_user.html')
