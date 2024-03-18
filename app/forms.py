@@ -177,19 +177,14 @@ class CourseForm(forms.ModelForm):
 
     part = forms.ModelChoiceField(
         queryset=Part.objects.all(),
-        widget=forms.Select(attrs={
-            'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500',
-        }),
+        widget=forms.Select(attrs={'class': 'form-select js-choice border-0 z-index-9 bg-transparent', 'aria-label': '.form-select-sm', 'data-search-enabled': 'true'}),
         required=True,
     )
 
     body = forms.CharField(
-        widget=forms.Textarea(attrs={
-            'class': 'block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500',
-            'placeholder': 'Write Course description here',
-            'rows': 4,
-        }),
-        required=False,
+        label='Course Body',
+        widget=forms.Textarea(attrs={'class': 'bg-body border rounded-bottom h-400px overflow-hidden', 'id': 'quilleditor'}),
+        required=True,
     )
     image = forms.ImageField(
         widget=forms.ClearableFileInput(attrs={
