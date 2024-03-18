@@ -182,15 +182,18 @@ class CourseForm(forms.ModelForm):
     )
 
     body = forms.CharField(
-        label='Course Body',
-        widget=forms.Textarea(attrs={'class': 'bg-body border rounded-bottom h-400px overflow-hidden', 'id': 'quilleditor'}),
-        required=True,
-    )
+        widget=forms.Textarea(attrs={
+            'class': 'bg-body border rounded-bottom h-400px overflow-hidden',
+            'placeholder': 'Write Course description here',
+            'rows': 4,
+        }),
+        required=False,
+    )   
     image = forms.ImageField(
         widget=forms.ClearableFileInput(attrs={
-            'class': 'your-custom-css-class',  # Add your custom CSS class here
+            'class': 'form-control',
         }),
-        required=False,  # Set to True if image is mandatory
+        required=False,  
     )
     class Meta:
         model = Course
