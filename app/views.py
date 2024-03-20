@@ -719,8 +719,6 @@ from django.contrib.auth.decorators import login_required
 def add_course(request):
     form = CourseForm(request.POST or None, request.FILES or None)
     video_form = VideoForm(request.POST or None, request.FILES or None)
-    
-    # Ensure that 'user' is passed correctly to the LectureForm constructor
     lecture_form = LectureForm(request.POST or None, initial={'user': request.user})
 
     if request.method == 'POST':
@@ -731,16 +729,20 @@ def add_course(request):
             form.save_m2m()  # Save many-to-many relationships if any
             return redirect('course_detail', pk=course.pk)
         elif 'video_submit' in request.POST and video_form.is_valid():
-            video_form.save()
+            video = video_form.save(commit=False)
+            video.save()
             return redirect('success_url')  # Redirect to a new URL
         elif 'lecture_submit' in request.POST and lecture_form.is_valid():
             lecture = lecture_form.save(commit=False)
-            lecture.course = Course.objects.get(pk=request.POST.get('course'))  # Set the course based on user selection
+            course_id = request.POST.get('course_id')  # Assuming there's a hidden input field in your form to capture the course ID
+            course = Course.objects.get(pk=course_id)
+            lecture.course = course
             lecture.save()
             lecture_form.save_m2m()
             return redirect('/')  
 
-    return render(request, 'add.html', {'form': form, 'video_form' : video_form, "lecture_form" : lecture_form})
+    return render(request, 'add.html', {'form': form, 'video_form': video_form, "lecture_form": lecture_form})
+
 
 def delete_users(request, pk):
     return render(request, 'delete_user.html')

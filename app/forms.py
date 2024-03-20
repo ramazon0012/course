@@ -201,25 +201,24 @@ class CourseForm(forms.ModelForm):
         exclude = ['like']
         
 class VideoForm(forms.ModelForm):
-    video_url = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'Enter video URL',
-            'type': 'text',
-        }),
-        required=True,
-    )
     class Meta:
         model = Video
-        fields = ['video_url', 'file']
+        fields = ['file']
         widgets = {
             'file': forms.FileInput(attrs={'accept': 'video/mp4,video/webm,video/ogg', 'class' : 'form-control'}),
         }
 
 class LectureForm(forms.ModelForm):
     videos = forms.ModelMultipleChoiceField(queryset=Video.objects.all(), widget=forms.CheckboxSelectMultiple)
-
+    name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Type Course name',
+            'type' : 'text',
+        }),
+        required=True,
+    )
     class Meta:
         model = Lecture
         fields = ['name', 'videos']
