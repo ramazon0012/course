@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from app.models import Course, Part, Comment, User, Lecture, Video, Tags, Review
-from app.forms import RatingReviewForm, CommentForm, UserForm, MyUserCreationForm, LoginForm, CourseSearchForm, CourseForm
+from app.forms import *
 from django.db.models import Q
 from django.contrib import messages
 from moviepy.video.io.VideoFileClip import VideoFileClip
@@ -713,18 +713,34 @@ def user_courses(request, pk):
     courses = Course.objects.filter(Q(name__icontains=query) | Q(level__icontains=query) | Q(price__icontains=query))
     return render(request, "user_courses.html", {'courses': courses, 'user_courses': user_courses})
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def add_course(request):
+    form = CourseForm(request.POST or None, request.FILES or None)
+    video_form = VideoForm(request.POST or None, request.FILES or None)
+    
+    # Ensure that 'user' is passed correctly to the LectureForm constructor
+    lecture_form = LectureForm(request.POST or None, initial={'user': request.user})
+
     if request.method == 'POST':
-        form = CourseForm(request.POST, request.FILES)
-        if form.is_valid():
+        if 'course_submit' in request.POST and form.is_valid():
             course = form.save(commit=False)
-            course.teacher = request.user
+            course.teacher = request.user  
             course.save()
             form.save_m2m()  # Save many-to-many relationships if any
-            return redirect('course_detail', pk=course.pk)  # Redirect to the detail view of the newly created course
-    else:
-        form = CourseForm()
-    return render(request, 'add.html', {'form': form})
+            return redirect('course_detail', pk=course.pk)
+        elif 'video_submit' in request.POST and video_form.is_valid():
+            video_form.save()
+            return redirect('success_url')  # Redirect to a new URL
+        elif 'lecture_submit' in request.POST and lecture_form.is_valid():
+            lecture = lecture_form.save(commit=False)
+            lecture.course = Course.objects.get(pk=request.POST.get('course'))  # Set the course based on user selection
+            lecture.save()
+            lecture_form.save_m2m()
+            return redirect('/')  
+
+    return render(request, 'add.html', {'form': form, 'video_form' : video_form, "lecture_form" : lecture_form})
 
 def delete_users(request, pk):
     return render(request, 'delete_user.html')

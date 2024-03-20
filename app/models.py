@@ -203,6 +203,7 @@ class Lecture(models.Model):
     
 class Video(models.Model):
     file = models.FileField(upload_to="videos/")
+    video_url = models.URLField(blank=True, null=True)
     name = models.CharField(max_length=44)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     poster = models.ImageField(upload_to="posters/")

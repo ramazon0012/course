@@ -1,5 +1,5 @@
 from django import forms
-from app.models import Rating, Comment, Review, User, Part, Course
+from app.models import *
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 class RatingReviewForm(forms.ModelForm):
@@ -199,3 +199,42 @@ class CourseForm(forms.ModelForm):
         model = Course
         fields  = '__all__'
         exclude = ['like']
+        
+class VideoForm(forms.ModelForm):
+    video_url = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter video URL',
+            'type': 'text',
+        }),
+        required=True,
+    )
+    class Meta:
+        model = Video
+        fields = ['video_url', 'file']
+        widgets = {
+            'file': forms.FileInput(attrs={'accept': 'video/mp4,video/webm,video/ogg', 'class' : 'form-control'}),
+        }
+
+class LectureForm(forms.ModelForm):
+    videos = forms.ModelMultipleChoiceField(queryset=Video.objects.all(), widget=forms.CheckboxSelectMultiple)
+
+    class Meta:
+        model = Lecture
+        fields = ['name', 'videos']
+
+    def __init__(self, *args, **kwargs):
+        # Remove 'user' from kwargs before calling the parent constructor
+        super(LectureForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True, user=None, course=None):
+        lecture = super(LectureForm, self).save(commit=False)
+        if user:
+            lecture.user = user
+        if course:
+            lecture.course = course
+        if commit:
+            lecture.save()
+            self.save_m2m()
+        return lecture
