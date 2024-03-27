@@ -713,8 +713,6 @@ def user_courses(request, pk):
     courses = Course.objects.filter(Q(name__icontains=query) | Q(level__icontains=query) | Q(price__icontains=query))
     return render(request, "user_courses.html", {'courses': courses, 'user_courses': user_courses})
 
-from django.contrib.auth.decorators import login_required
-
 @login_required
 def add_course(request):
     form = CourseForm(request.POST or None, request.FILES or None)
@@ -742,7 +740,6 @@ def add_course(request):
             return redirect('/')  
 
     return render(request, 'add.html', {'form': form, 'video_form': video_form, "lecture_form": lecture_form})
-
 
 def delete_users(request, pk):
     return render(request, 'delete_user.html')
@@ -803,23 +800,23 @@ def parts(request):
         "parts" : parts
     })
 
-def watch_video(request, lecture_id, video_id):
-    lecture = get_object_or_404(Lecture, pk=lecture_id)
-    video = get_object_or_404(Video, pk=video_id)
+def student_subscrtiption(request):
+    return render(request, "subscription.html")
 
-    # Update the last_watched time for the video for the current user
-    video.last_watched = timezone.now()
-    video.save()
+def resume(request):
+    return render(request, "resume.html")
 
-    # You may also want to update the lecture's last_watched time or any other logic
+def payment_info(request):
+    return render(request, "payment_info.html")
 
-    return HttpResponse("Video watched successfully!")
+def instructor_settings(request):
+    return render(request, "instructor_settings.html")
 
-def last_watched_videos(request, lecture_id):
-    lecture = get_object_or_404(Lecture, pk=lecture_id)
+def instructor_earning(request):
+    return render(request, "instructor_earning.html")
 
-    last_watched_videos = lecture.videos.filter(last_watched__isnull=False).order_by('-last_watched')
+def instructor_student(request):
+    return render(request, "instructor_student.html")
 
-    last_watched_video_ids = last_watched_videos.values_list('id', flat=True)
-
-    return HttpResponse(f"Last watched video IDs: {', '.join(map(str, last_watched_video_ids))}")
+def order(request):
+    return render(request, "order.html")
